@@ -1,0 +1,26 @@
+[
+{
+  "directory": "C:/Users/laceperro/CLionProjects/SheepRaiderDecomp/cmake-build-debug-visual-studio",
+  "command": "C:\\PROGRA~1\\MICROS~2\\2022\\PROFES~1\\VC\\Tools\\MSVC\\1444~1.352\\bin\\Hostx64\\x64\\cl.exe  /nologo /TP -DWIN32_LEAN_AND_MEAN -D_CRT_SECURE_NO_WARNINGS -D_WIN32_WINNT=0x0601 -IC:\\Users\\laceperro\\CLionProjects\\SheepRaiderDecomp\\resources -IC:\\DX9\\Include /DWIN32 /D_WINDOWS /EHsc /Zi /Ob0 /Od /RTC1 -MDd /FoCMakeFiles\\SheepRaiderDecomp.dir\\src\\main.cpp.obj /FdCMakeFiles\\SheepRaiderDecomp.dir\\ /FS -c C:\\Users\\laceperro\\CLionProjects\\SheepRaiderDecomp\\src\\main.cpp",
+  "file": "C:/Users/laceperro/CLionProjects/SheepRaiderDecomp/src/main.cpp",
+  "output": "C:/Users/laceperro/CLionProjects/SheepRaiderDecomp/cmake-build-debug-visual-studio/CMakeFiles/SheepRaiderDecomp.dir/src/main.cpp.obj"
+},
+{
+  "directory": "C:/Users/laceperro/CLionProjects/SheepRaiderDecomp/cmake-build-debug-visual-studio",
+  "command": "C:\\PROGRA~2\\WI3CF2~1\\10\\bin\\100190~1.0\\x64\\rc.exe -DWIN32_LEAN_AND_MEAN -D_CRT_SECURE_NO_WARNINGS -D_WIN32_WINNT=0x0601 -I C:\\Users\\laceperro\\CLionProjects\\SheepRaiderDecomp\\resources -I C:\\DX9\\Include -DWIN32 -D_DEBUG /fo CMakeFiles\\SheepRaiderDecomp.dir\\resources\\embed_bmp.rc.res C:\\Users\\laceperro\\CLionProjects\\SheepRaiderDecomp\\resources\\embed_bmp.rc",
+  "file": "C:/Users/laceperro/CLionProjects/SheepRaiderDecomp/resources/embed_bmp.rc",
+  "output": "C:/Users/laceperro/CLionProjects/SheepRaiderDecomp/cmake-build-debug-visual-studio/CMakeFiles/SheepRaiderDecomp.dir/resources/embed_bmp.rc.res"
+},
+{
+  "directory": "C:/Users/laceperro/CLionProjects/SheepRaiderDecomp/cmake-build-debug-visual-studio",
+  "command": "C:\\PROGRA~2\\WI3CF2~1\\10\\bin\\100190~1.0\\x64\\rc.exe -DWIN32_LEAN_AND_MEAN -D_CRT_SECURE_NO_WARNINGS -D_WIN32_WINNT=0x0601 -I C:\\Users\\laceperro\\CLionProjects\\SheepRaiderDecomp\\resources -I C:\\DX9\\Include -DWIN32 -D_DEBUG /fo CMakeFiles\\SheepRaiderDecomp.dir\\resources\\launcher.rc.res C:\\Users\\laceperro\\CLionProjects\\SheepRaiderDecomp\\resources\\launcher.rc",
+  "file": "C:/Users/laceperro/CLionProjects/SheepRaiderDecomp/resources/launcher.rc",
+  "output": "C:/Users/laceperro/CLionProjects/SheepRaiderDecomp/cmake-build-debug-visual-studio/CMakeFiles/SheepRaiderDecomp.dir/resources/launcher.rc.res"
+},
+{
+  "directory": "C:/Users/laceperro/CLionProjects/SheepRaiderDecomp/cmake-build-debug-visual-studio",
+  "command": "C:\\PROGRA~1\\MICROS~2\\2022\\PROFES~1\\VC\\Tools\\MSVC\\1444~1.352\\bin\\Hostx64\\x64\\cl.exe  /nologo /TP -DWIN32_LEAN_AND_MEAN -D_CRT_SECURE_NO_WARNINGS -D_WIN32_WINNT=0x0601 -IC:\\Users\\laceperro\\CLionProjects\\SheepRaiderDecomp\\resources -IC:\\DX9\\Include /DWIN32 /D_WINDOWS /EHsc /Zi /Ob0 /Od /RTC1 -MDd /FoCMakeFiles\\SheepRaiderDecomp.dir\\src\\bitmapUtils.cpp.obj /FdCMakeFiles\\SheepRaiderDecomp.dir\\ /FS -c C:\\Users\\laceperro\\CLionProjects\\SheepRaiderDecomp\\src\\bitmapUtils.cpp",
+  "file": "C:/Users/laceperro/CLionProjects/SheepRaiderDecomp/src/bitmapUtils.cpp",
+  "output": "C:/Users/laceperro/CLionProjects/SheepRaiderDecomp/cmake-build-debug-visual-studio/CMakeFiles/SheepRaiderDecomp.dir/src/bitmapUtils.cpp.obj"
+}
+]

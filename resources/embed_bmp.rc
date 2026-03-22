@@ -1,0 +1,7 @@
+#include <windows.h>
+#include "resource.h"
+115 BITMAP "Bitmap/115.bmp"
+140 BITMAP "Bitmap/140.bmp"
+146 BITMAP "Bitmap/146.bmp"
+145 BITMAP "Bitmap/145.bmp"
+147 BITMAP "Bitmap/147.bmp"

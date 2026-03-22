@@ -1,0 +1,3 @@
+C:/Users/laceperro/CLionProjects/SheepRaiderDecomp/cmake-build-debug-visual-studio/CMakeFiles/SheepRaiderDecomp.dir
+C:/Users/laceperro/CLionProjects/SheepRaiderDecomp/cmake-build-debug-visual-studio/CMakeFiles/edit_cache.dir
+C:/Users/laceperro/CLionProjects/SheepRaiderDecomp/cmake-build-debug-visual-studio/CMakeFiles/rebuild_cache.dir
