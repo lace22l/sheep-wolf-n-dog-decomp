@@ -15,6 +15,7 @@ target_link_libraries(SheepRaiderDecomp
         d3dx9
         dsetup
         dxguid
+        dinput8
         user32
         gdi32
         kernel32

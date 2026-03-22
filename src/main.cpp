@@ -8,9 +8,10 @@
 #include <iostream>
 #include <dsetup.h>
 #include "resource.h"
-
+#define DIRECTINPUT_VERSION 0x0800
 #include <cstring>
 #include <d3d9.h>
+#include <dinput.h>
 #include <d3dx9.h>
 #include "bitmapUtils.h"
 HINSTANCE ghInstance = NULL;
@@ -70,6 +71,14 @@ int directx_checker_dialog(void) {
 }
 */
 
+struct EngineContext {
+    IDirect3DDevice9* device;
+    IDirect3D9* d3d;
+    HWND hwnd;
+    IDirectInput8* dinput;
+
+
+};
 int get_lang_bitmask() {
     LANGID langid;
     int lang_bitmask;
@@ -102,7 +111,36 @@ int get_lang_bitmask() {
     }
     return lang_bitmask;
 }
+/*
+EngineContext directx_init(HWND windowInstance, HINSTANCE hInstance, int mystery_param) {
+    // DirectDrawEnumerate(directx_callback_func,0,7); THIS IS DEPRECATED IN DX9
+        EngineContext ctx = {};
+        ctx.d3d = Direct3DCreate9(D3D_SDK_VERSION);
+        ctx.hwnd = windowInstance;
+        D3DPRESENT_PARAMETERS pp = {};
+        pp.Windowed = FALSE;
+        pp.SwapEffect = D3DSWAPEFFECT_DISCARD;
+        pp.hDeviceWindow = windowInstance;
+        pp.BackBufferFormat = D3DFMT_UNKNOWN;
+        ctx.d3d->CreateDevice(
+          D3DADAPTER_DEFAULT,
+          D3DDEVTYPE_HAL,
+          windowInstance,
+          D3DCREATE_HARDWARE_VERTEXPROCESSING,
+          &pp,
+          &ctx.device
+      );
 
+        DirectInput8Create(
+            hInstance,
+            DIRECTINPUT_VERSION,
+            IID_IDirectInput8,
+            (void**)&ctx.dinput,
+            nullptr);
+        return ctx;
+
+
+}*/
 LRESULT CALLBACK WndProc(HWND hwnd, UINT msg, WPARAM wParam, LPARAM lParam) {
     switch (msg) {
         case WM_DESTROY:
@@ -117,11 +155,9 @@ LRESULT CALLBACK WndProc(HWND hwnd, UINT msg, WPARAM wParam, LPARAM lParam) {
 }
 
 INT_PTR CALLBACK DialogProc(HWND hDlg, UINT message, WPARAM wParam, LPARAM lParam) {
-    COLORREF text_color =  0x00000000;
-    LPCSTR pCVar3 = "Sheep Raider Decomp";
-    LPCSTR text_button;
-    HBITMAP hBmp;
-    HWND hBtn;
+    // TODO: Understand how the fuck does the game actually get the name as i cannot find it in the strings or resources
+    LPCSTR modal_title = "Sheep Raider Decomp";
+
     switch (message) {
         case WM_ERASEBKGND: {
             HDC hdc = (HDC)wParam;
@@ -157,7 +193,7 @@ INT_PTR CALLBACK DialogProc(HWND hDlg, UINT message, WPARAM wParam, LPARAM lPara
         }
         case WM_INITDIALOG:
             {
-            SetWindowTextA(hDlg, pCVar3);
+            SetWindowTextA(hDlg, modal_title);
             struct ButtonInfo {
                 int id;
                 int bmpId;
@@ -170,8 +206,8 @@ INT_PTR CALLBACK DialogProc(HWND hDlg, UINT message, WPARAM wParam, LPARAM lPara
                 {1103, 145, 0x000000},
                 {1104, 145, 0x000000},
                 {1105, 145, 0x000000},
-{1106, 145, 0x000000},
-{1108, 145, 0x000000},
+                {1106, 145, 0x000000},
+                {1108, 145, 0x000000},
                 {1101, 146, 0xF6EEEE}, // Play
                 {1109, 146, 0xF6EEEE}, //Quit
             };
@@ -186,22 +222,6 @@ INT_PTR CALLBACK DialogProc(HWND hDlg, UINT message, WPARAM wParam, LPARAM lPara
                 HWND hBtn = GetDlgItem(hDlg, b.id);
                 SendMessage(hBtn, BM_SETIMAGE, IMAGE_BITMAP, (LPARAM)hBmp);
             }
-            /*
-
-            // Install DirectX button
-            const char* text_button1 = "Install DirectX 8";
-            HBITMAP hBmp1 = drawTextOverBitmap(hDlg, 145, text_button1, text_color);
-
-            HWND hBtn1 = GetDlgItem(hDlg, 1100);
-            SendMessage(hBtn1, BM_SETIMAGE, IMAGE_BITMAP, (LPARAM)hBmp1);
-
-            // Play button
-            const char* text_button2 = "Play!";
-            text_color = 0xf6eeee;
-            HBITMAP hBmp2 = drawTextOverBitmap(hDlg, 146, text_button2, text_color);
-
-            HWND hBtn2 = GetDlgItem(hDlg, 1101);
-            SendMessage(hBtn2, BM_SETIMAGE, IMAGE_BITMAP, (LPARAM)hBmp2);*/
             return TRUE;
     }
 
@@ -224,12 +244,15 @@ INT_PTR CALLBACK DialogProc(HWND hDlg, UINT message, WPARAM wParam, LPARAM lPara
 
                     case 1:
                         // corresponds to button ID 1101 (Play in your mapping)
-                        MessageBoxA(hDlg, "Play Button", "Info", MB_OK);
+
+                        EndDialog(hDlg, 0);
+                        break;
+
                         break;
 
                     case 9:
                         // corresponds to button ID 1109 (Quit)
-                        EndDialog(hDlg, 0);
+                        EndDialog(hDlg, 1);
                         break;
 
                     default:
@@ -240,6 +263,12 @@ INT_PTR CALLBACK DialogProc(HWND hDlg, UINT message, WPARAM wParam, LPARAM lPara
         }
     }
     return FALSE;
+}
+
+void contextHandler(const EngineContext & ctx)
+{
+    HDC hdc = GetDC(ctx.hwnd);
+
 }
 
 void create_window(HINSTANCE hInstance) {
@@ -276,10 +305,18 @@ void create_window(HINSTANCE hInstance) {
         hInstance,
         NULL
     );
-    ShowWindow(main_window, SW_SHOW);
-    UpdateWindow(main_window);
+
     MSG msg = {};
 
+    int result = DialogBox(hInstance, MAKEINTRESOURCE(IDD_LAUNCHER), NULL, DialogProc);
+
+    if (result == 1) {
+        return;
+    }
+    ShowWindow(main_window, SW_SHOW);
+    UpdateWindow(main_window);
+    //EngineContext ctx = directx_init(main_window, hInstance, 3);
+    //contextHandler(ctx);
     while (GetMessage(&msg, NULL, 0, 0)) {
         TranslateMessage(&msg);
         DispatchMessage(&msg);
@@ -292,21 +329,10 @@ int APIENTRY WinMain(HINSTANCE hInstance,
                      LPSTR lpCmdLine,
                      int nCmdShow) {
     ghInstance = hInstance;
+    // Get The actual font
     strcpy(GLOBAL_FONT.lfFaceName, "Tahoma");
     GLOBAL_FONT.lfHeight = -11;
-    //MessageBox(NULL, "About to show dialog", "Debug", MB_OK);
-    int ret = DialogBox(hInstance, MAKEINTRESOURCE(IDD_LAUNCHER), NULL, DialogProc);
+    create_window(hInstance);
 
-    if (ret == -1)
-    {
-        DWORD err = GetLastError();
-
-        char buf[256];
-        sprintf(buf, "DialogBox failed. Error: %lu", err);
-
-        MessageBox(NULL, buf, "Error", MB_OK);
-    }
-
-    //create_window(hInstance);
     return 0;
 }
