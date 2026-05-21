@@ -1,5 +1,7 @@
 # Sheep, Wolf N Dog Decomp
 
+All the research is being done in the Sheep Raider Speedrunning Discord, if interested in contributing email me at contact@lace22.dog 
+
 I wrote an article on my shit blog to document stuff I found
 [Blog](https://lace22.dog/articles)
 
